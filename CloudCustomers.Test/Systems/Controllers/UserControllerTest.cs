@@ -1,3 +1,4 @@
+using CloudCustomers.Test.Fixtures;
 using CloudCustomersAPI.Controllers;
 using CloudCustomersAPI.Model;
 using CloudCustomersAPI.Services.Abstract;
@@ -16,21 +17,7 @@ namespace CloudCustomers.Test
             var mockUserService = new Mock<IUserService>();
             mockUserService.Setup(
                 service => service.GetAllUsers())
-                 .ReturnsAsync(new List<User>()
-                {
-                    new User
-                    {
-                        Id=1,
-                        Name = "Yýldýray",
-                        Email ="Gemük",
-                        Address = new Address()
-                        {
-                            City="Ýstanbul",
-                            Street="Maltepe",
-                            ZipCode="34444"
-                        }
-                    }
-                });
+                 .ReturnsAsync(UsersFixture.GetTestUsers());
             var sut = new UserController(mockUserService.Object);
 
             //Act
@@ -67,21 +54,7 @@ namespace CloudCustomers.Test
             var mockUserService = new Mock<IUserService>();
             mockUserService.Setup(
                 service => service.GetAllUsers())
-                .ReturnsAsync(new List<User>()
-                {
-                    new User
-                    {
-                        Id=1,
-                        Name = "Yýldýray",
-                        Email ="Gemük",
-                        Address = new Address()
-                        {
-                            City="Ýstanbul",
-                            Street="Maltepe",
-                            ZipCode="34444"
-                        }
-                    }
-                });
+                .ReturnsAsync(UsersFixture.GetTestUsers());
             var sut = new UserController(mockUserService.Object);
             //Act
             var result = await sut.Get();
